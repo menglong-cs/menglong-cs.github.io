@@ -16,17 +16,21 @@
   <meta name="author" content="Menglong">
   <meta name="keywords" content="">
   
-    <meta name="description" content="日常随笔">
+    <meta name="description" content="1.机器学习篇2.RNN &amp; LSTM &amp; GRU3.Transformer &amp; GPT &amp; BERTPre Norm和Post Norm的区别PreNorm: Xt+1 &#x3D; Xt + F(Norm(Xt)) &#x3D; Xt-1 + F(Norm(Xt-1)) + F(Norm(Xt)) &#x3D; X0 + F(Norm(X0)) + … + F(">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NLP八股文">
 <meta property="og:url" content="http://example.com/2024/05/23/NLP%E5%85%AB%E8%82%A1%E6%96%87/index.html">
 <meta property="og:site_name" content="追梦少年的博客">
-<meta property="og:description" content="日常随笔">
+<meta property="og:description" content="1.机器学习篇2.RNN &amp; LSTM &amp; GRU3.Transformer &amp; GPT &amp; BERTPre Norm和Post Norm的区别PreNorm: Xt+1 &#x3D; Xt + F(Norm(Xt)) &#x3D; Xt-1 + F(Norm(Xt-1)) + F(Norm(Xt)) &#x3D; X0 + F(Norm(X0)) + … + F(">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-104261e6ef3093cb2a1aef545e147827_1440w.webp">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-4821aba4e13085e36c4b0ccd44110b57_1440w.webp">
 <meta property="article:published_time" content="2024-05-23T13:02:39.000Z">
-<meta property="article:modified_time" content="2024-05-23T13:02:39.025Z">
+<meta property="article:modified_time" content="2024-05-23T13:27:17.063Z">
 <meta property="article:author" content="Menglong">
+<meta property="article:tag" content="八股文">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-104261e6ef3093cb2a1aef545e147827_1440w.webp">
   
   
   
@@ -243,7 +247,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          1.7k 字
         
       </span>
     
@@ -254,7 +258,7 @@
         
         
         
-          1 分钟
+          15 分钟
         
       </span>
     
@@ -296,7 +300,59 @@
             
               <div class="markdown-body">
                 
-                
+                <h2 id="1-机器学习篇"><a href="#1-机器学习篇" class="headerlink" title="1.机器学习篇"></a>1.机器学习篇</h2><h2 id="2-RNN-LSTM-GRU"><a href="#2-RNN-LSTM-GRU" class="headerlink" title="2.RNN &amp; LSTM &amp; GRU"></a>2.RNN &amp; LSTM &amp; GRU</h2><h2 id="3-Transformer-GPT-BERT"><a href="#3-Transformer-GPT-BERT" class="headerlink" title="3.Transformer &amp; GPT &amp; BERT"></a>3.Transformer &amp; GPT &amp; BERT</h2><h2 id="Pre-Norm和Post-Norm的区别"><a href="#Pre-Norm和Post-Norm的区别" class="headerlink" title="Pre Norm和Post Norm的区别"></a>Pre Norm和Post Norm的区别</h2><p>PreNorm: X<del>t+1</del> &#x3D; X<del>t</del> + F(Norm(X<del>t</del>)) &#x3D; X<del>t-1</del> + F(Norm(X<del>t-1</del>)) + F(Norm(X<del>t</del>)) &#x3D; X<del>0</del> + F(Norm(X<del>0</del>)) + … + F(Norm(X<del>t</del>))</p>
+<p>PostNorm: X(t+1) &#x3D; Norm(Xt + F(Xt))</p>
+<p>post-norm在残差之后做归一化，对参数正则化的效果更强，进而模型的鲁棒性也会更好</p>
+<p>pre-norm相对于post-norm，因为有一部分参数直接加在了后面，不需要对这部分参数进行正则化，正好可以防止模型的梯度爆炸或者梯度消失，训练更稳定</p>
+<p>Post-norm: 训练不稳定，但若成功收敛，性能比pre-norm好</p>
+<p>Pre-norm：训练更稳定，但理论层数不如Post-norm</p>
+<p>层数少选post-norm，层数多选pre-norm</p>
+<h2 id="3-transformer-为什么要除-根号下d-k"><a href="#3-transformer-为什么要除-根号下d-k" class="headerlink" title="3. transformer 为什么要除 根号下d_k"></a>3. transformer 为什么要除 根号下d_k</h2><p>attention(Q, K, V) &#x3D; softmax(QK^T^&#x2F;$\sqrt(d)$)V</p>
+<ul>
+<li>防止QK^T^的值过大，若QK的值过大，那么经过softmax后</li>
+<li>使得QK^T^的结果满足期望为0，方差为1的分布，类似于归一化</li>
+</ul>
+<p><img src="https://pic4.zhimg.com/80/v2-104261e6ef3093cb2a1aef545e147827_1440w.webp" srcset="/img/loading.gif" lazyload alt="img" style="zoom: 50%;" /><img src="https://pic4.zhimg.com/80/v2-4821aba4e13085e36c4b0ccd44110b57_1440w.webp" srcset="/img/loading.gif" lazyload alt="img" style="zoom:50%;" /></p>
+<h2 id="4-self-attn的计算复杂度"><a href="#4-self-attn的计算复杂度" class="headerlink" title="4. self-attn的计算复杂度"></a>4. self-attn的计算复杂度</h2><p>计算复杂度为O(n^2 * d)  n是序列长度，d是每个token的维度</p>
+<p>Q * K^T^ &#x3D; [n, d] * [d, n] &#x3D; [n, n] (复杂度为O(n^2^ * d))</p>
+<p>(Q * K^T^) * V &#x3D; [n, n] * [n, d] &#x3D; [n, d] (复杂度为 O(n^2^ * d))</p>
+<h2 id="4-激活函数"><a href="#4-激活函数" class="headerlink" title="4.激活函数"></a>4.激活函数</h2><h2 id="5-损失函数"><a href="#5-损失函数" class="headerlink" title="5.损失函数"></a>5.损失函数</h2><h2 id="6-优化器"><a href="#6-优化器" class="headerlink" title="6.优化器"></a>6.优化器</h2><h2 id="7-正则化"><a href="#7-正则化" class="headerlink" title="7.正则化"></a>7.正则化</h2><h2 id="BatchNorm和LayerNorm的区别"><a href="#BatchNorm和LayerNorm的区别" class="headerlink" title="BatchNorm和LayerNorm的区别"></a>BatchNorm和LayerNorm的区别</h2><p>Norm的目的是为了将数据拉回标准正态分布，让训练更稳定。</p>
+<p>BatchNorm是拿一个Batch的每一维特征进行归一化，LayerNorm是拿每个样本的所有特征进行归一化。</p>
+<p>BN抹杀了不同特征之间的大小关系（将Batch内每一维特征进行归一化），保留了不同样本间的大小关系</p>
+<p>LN抹杀了不同样本之间的大小关系（将每个样本的所有特征进行归一化），保留了不同特征间的大小关系。</p>
+<p>因为每个序列的长度通常不一样（虽然有padding，但无意义），所以无法做batchnorm。</p>
+<h2 id="8-LLM"><a href="#8-LLM" class="headerlink" title="8. LLM"></a>8. LLM</h2><h2 id="6-Continue-Pretraining和SFT"><a href="#6-Continue-Pretraining和SFT" class="headerlink" title="6. Continue Pretraining和SFT"></a>6. Continue Pretraining和SFT</h2><p>Continue Pretraining是在领域数据上进行预训练，使用的是没有标签的数据，数据格式和预训练的一样。Continue Pretraining的目的是让LLM更好地处理和理解领域数据</p>
+<p>SFT是使用特定任务的数据集，有标签。SFT的目的是优化LLM在特定任务上的表现。</p>
+<h2 id="7-如何解决继续预训练和微调阶段的灾难性遗忘问题"><a href="#7-如何解决继续预训练和微调阶段的灾难性遗忘问题" class="headerlink" title="7. 如何解决继续预训练和微调阶段的灾难性遗忘问题"></a>7. 如何解决继续预训练和微调阶段的灾难性遗忘问题</h2><p>目前不少开源模型在通用领域具有不错的效果，但由于缺乏领域数据，往往在一些垂直领域中表现不理想，这时就需要<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%A2%9E%E9%87%8F%E9%A2%84%E8%AE%AD%E7%BB%83&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3373620546%7D">增量预训练</a>和微调等方法来提高模型的领域能力。</p>
+<p>但在领域数据增量预训练或微调时，很容易出现灾难性遗忘现象，也就是学会了垂直领域知识，但忘记了通用领域知识。</p>
+<p>解决方法：</p>
+<ul>
+<li>调整继续预训练时的数据配比，增加通用数据的比例，增加数据量</li>
+<li>使用adapter微调，对于每个任务微调一个adapter</li>
+<li>使用正则化的办法可以降低对预训练特征的破坏</li>
+</ul>
+<h2 id="8-LLM训练、推理如何省显存"><a href="#8-LLM训练、推理如何省显存" class="headerlink" title="8. LLM训练、推理如何省显存"></a>8. LLM训练、推理如何省显存</h2><p>训练</p>
+<ul>
+<li>使用fp16，bf16等低精度来进行训练</li>
+<li>梯度检查点：删除中间变量，需要的时候再重新计算</li>
+<li><strong>ZERO系列优化</strong>，参数&#x2F;梯度&#x2F;优化器状态等分片存储，存到内存中，即用即取</li>
+<li>减小batch size，使用梯度累积</li>
+</ul>
+<p>推理：</p>
+<p>- </p>
+<h2 id="9-如何缓解大模型幻觉问题"><a href="#9-如何缓解大模型幻觉问题" class="headerlink" title="9. 如何缓解大模型幻觉问题"></a>9. 如何缓解大模型幻觉问题</h2><ul>
+<li>高级提示词，带有详细说明的复杂提示词能够缓解幻觉问题</li>
+<li>RAG，检索外部知识库</li>
+<li>验证链：<ul>
+<li>生成基线响应：给定一个查询，使用 LLM 生成响应。</li>
+<li>设计验证：给定查询和基线响应，生成验证问题列表，有助于自我分析原始响应中是否存在任何错误。</li>
+<li>执行验证：依次回答每个验证问题，然后将答案与原始响应进行检查，以检查是否存在不一致或错误。</li>
+<li>生成最终验证响应：鉴于发现的不一致（如果有），生成包含验证结果的修订响应。</li>
+</ul>
+</li>
+<li></li>
+</ul>
+
                 
               </div>
             
@@ -304,6 +360,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/NLP/" class="category-chain-item">NLP</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%85%AB%E8%82%A1%E6%96%87/" class="print-no-link">#八股文</a>
+      
+    </div>
   
 </div>
 
