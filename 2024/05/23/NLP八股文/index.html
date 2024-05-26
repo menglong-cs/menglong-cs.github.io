@@ -16,22 +16,24 @@
   <meta name="author" content="Menglong">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1.机器学习篇2.RNN &amp; LSTM &amp; GRU3.Transformer &amp; GPT &amp; BERT3.1 Pre Norm和Post Norm的区别PreNorm: Xt+1 &#x3D; Xt + F(Norm(Xt)) &#x3D; Xt-1 + F(Norm(Xt-1)) + F(Norm(Xt)) &#x3D; X0 + F(Norm(X0)) + …">
+    <meta name="description" content="1.机器学习篇2.RNN &amp; LSTM &amp; GRUTokenizertokenizer的作用是将文本切分成token，token可以是一个单词、单个字符或多个字符组成的subword。每个token对应一个整数，所以文本就可以转换成向量输入神经网络。Transformer中最常用的tokenizer是BPE（bype-pair encoding），wordpiece和unigram">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NLP八股文">
 <meta property="og:url" content="http://example.com/2024/05/23/NLP%E5%85%AB%E8%82%A1%E6%96%87/index.html">
 <meta property="og:site_name" content="追梦少年的博客">
-<meta property="og:description" content="1.机器学习篇2.RNN &amp; LSTM &amp; GRU3.Transformer &amp; GPT &amp; BERT3.1 Pre Norm和Post Norm的区别PreNorm: Xt+1 &#x3D; Xt + F(Norm(Xt)) &#x3D; Xt-1 + F(Norm(Xt-1)) + F(Norm(Xt)) &#x3D; X0 + F(Norm(X0)) + …">
+<meta property="og:description" content="1.机器学习篇2.RNN &amp; LSTM &amp; GRUTokenizertokenizer的作用是将文本切分成token，token可以是一个单词、单个字符或多个字符组成的subword。每个token对应一个整数，所以文本就可以转换成向量输入神经网络。Transformer中最常用的tokenizer是BPE（bype-pair encoding），wordpiece和unigram">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2024/05/23/NLP%E5%85%AB%E8%82%A1%E6%96%87/NLP%E5%85%AB%E8%82%A1%E6%96%87.assets/WeChateca3c30b348c7d08d8140b32df6b3ba6.jpg">
 <meta property="og:image" content="http://example.com/2024/05/23/NLP%E5%85%AB%E8%82%A1%E6%96%87/NLP%E5%85%AB%E8%82%A1%E6%96%87.assets/WeChat4a5cc56c41c85d5410a82f0ce45ccfc4.jpg">
-<meta property="og:image" content="http://example.com/NLP%E5%85%AB%E8%82%A1%E6%96%87.assets/image-20240523224131471.png">
-<meta property="og:image" content="http://example.com/NLP%E5%85%AB%E8%82%A1%E6%96%87.assets/x.png">
-<meta property="og:image" content="http://example.com/NLP%E5%85%AB%E8%82%A1%E6%96%87.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5qCL5qyh5aSn5qyh,size_20,color_FFFFFF,t_70,g_se,x_16-20240523224224762.png">
+<meta property="og:image" content="http://example.com/2024/05/23/NLP%E5%85%AB%E8%82%A1%E6%96%87/NLP%E5%85%AB%E8%82%A1%E6%96%87.assets/image-20240523224131471.png">
+<meta property="og:image" content="http://example.com/2024/05/23/NLP%E5%85%AB%E8%82%A1%E6%96%87/NLP%E5%85%AB%E8%82%A1%E6%96%87.assets/x.png">
+<meta property="og:image" content="http://example.com/2024/05/23/NLP%E5%85%AB%E8%82%A1%E6%96%87/NLP%E5%85%AB%E8%82%A1%E6%96%87.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5qCL5qyh5aSn5qyh,size_20,color_FFFFFF,t_70,g_se,x_16-20240523224224762.png">
 <meta property="og:image" content="http://example.com/NLP%E5%85%AB%E8%82%A1%E6%96%87.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5qCL5qyh5aSn5qyh,size_20,color_FFFFFF,t_70,g_se,x_16-20240523224253522.png">
 <meta property="og:image" content="http://example.com/2024/05/23/NLP%E5%85%AB%E8%82%A1%E6%96%87/NLP%E5%85%AB%E8%82%A1%E6%96%87.assets/v2-0d644ecd419bbdfdae9be5a8c076b9f7_1440w.webp">
+<meta property="og:image" content="http://example.com/2024/05/23/NLP%E5%85%AB%E8%82%A1%E6%96%87/NLP%E5%85%AB%E8%82%A1%E6%96%87.assets/%E6%88%AA%E5%B1%8F2024-05-25%2011.49.42.png">
+<meta property="og:image" content="http://example.com/2024/05/23/NLP%E5%85%AB%E8%82%A1%E6%96%87/NLP%E5%85%AB%E8%82%A1%E6%96%87.assets/%E6%88%AA%E5%B1%8F2024-05-25%2015.44.45.png">
 <meta property="article:published_time" content="2024-05-23T13:02:39.000Z">
-<meta property="article:modified_time" content="2024-05-23T16:54:18.372Z">
+<meta property="article:modified_time" content="2024-05-26T11:16:08.835Z">
 <meta property="article:author" content="Menglong">
 <meta property="article:tag" content="八股文">
 <meta name="twitter:card" content="summary_large_image">
@@ -252,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.5k 字
+          9k 字
         
       </span>
     
@@ -263,7 +265,7 @@
         
         
         
-          38 分钟
+          76 分钟
         
       </span>
     
@@ -305,14 +307,61 @@
             
               <div class="markdown-body">
                 
-                <h2 id="1-机器学习篇"><a href="#1-机器学习篇" class="headerlink" title="1.机器学习篇"></a>1.机器学习篇</h2><h2 id="2-RNN-LSTM-GRU"><a href="#2-RNN-LSTM-GRU" class="headerlink" title="2.RNN &amp; LSTM &amp; GRU"></a>2.RNN &amp; LSTM &amp; GRU</h2><h2 id="3-Transformer-GPT-BERT"><a href="#3-Transformer-GPT-BERT" class="headerlink" title="3.Transformer &amp; GPT &amp; BERT"></a>3.Transformer &amp; GPT &amp; BERT</h2><h3 id="3-1-Pre-Norm和Post-Norm的区别"><a href="#3-1-Pre-Norm和Post-Norm的区别" class="headerlink" title="3.1 Pre Norm和Post Norm的区别"></a>3.1 Pre Norm和Post Norm的区别</h3><p>PreNorm: X<del>t+1</del> &#x3D; X<del>t</del> + F(Norm(X<del>t</del>)) &#x3D; X<del>t-1</del> + F(Norm(X<del>t-1</del>)) + F(Norm(X<del>t</del>)) &#x3D; X<del>0</del> + F(Norm(X<del>0</del>)) + … + F(Norm(X<del>t</del>))</p>
-<p>PostNorm: X(t+1) &#x3D; Norm(Xt + F(Xt))</p>
+                <h2 id="1-机器学习篇"><a href="#1-机器学习篇" class="headerlink" title="1.机器学习篇"></a>1.机器学习篇</h2><h2 id="2-RNN-LSTM-GRU"><a href="#2-RNN-LSTM-GRU" class="headerlink" title="2.RNN &amp; LSTM &amp; GRU"></a>2.RNN &amp; LSTM &amp; GRU</h2><h2 id="Tokenizer"><a href="#Tokenizer" class="headerlink" title="Tokenizer"></a>Tokenizer</h2><p>tokenizer的作用是将文本切分成token，token可以是一个单词、单个字符或多个字符组成的subword。每个token对应一个整数，所以文本就可以转换成向量输入神经网络。Transformer中最常用的tokenizer是BPE（bype-pair encoding），wordpiece和unigram。</p>
+<p>wordpiece和bpe一开始都是从小的vocabulary开始（每个都是单个字符），然后通过与其他字符合并来查看频率和似然概率来进行合并。</p>
+<p>其中bpe直接对比a、b两项合并的频率，而wordpiece还需要除于a、b两项单独出现的频率乘积来做归一化。</p>
+<p>bpe是根据merge规则，从单个字符一步步进行合并，而wordpiece每次是直接找最长能够匹配的subword。</p>
+<p>unigram是从大的vocabulary（所有subword的组合）开始，每一轮去排除一些subword组合，方法是利用unigram语言模型，对比排除哪个subword可以使loss增加的最少。</p>
+<p>使用BPE的模型：GPT、GPT2、RoBERTa、BART、DeBERTa等</p>
+<p>使用WordPiece的模型：BERT、DistilBERT</p>
+<p>Unigram：ALBERT、T5，mBART、BigBird、XLNET</p>
+<h3 id="Word-Piece"><a href="#Word-Piece" class="headerlink" title="Word Piece"></a>Word Piece</h3><ul>
+<li>获得足够大的语料库。</li>
+<li>定义所需的子词词汇量。</li>
+<li>将单词拆分为字符序列。</li>
+<li>用文本中的所有字符初始化词汇表。</li>
+<li>根据词汇建立语言模型。</li>
+<li>通过将当前词汇表中的两个单元组合以将词汇表增加一个来生成新的子词单元。 从所有可能的组合中选择加入词表后能最大程度地增加语言模型在训练数据上的似然概率的组合。（a、b的频率&#x2F;(a的频率 * b的频率)）<ul>
+<li>$logP(z)-(logP(x) + logP(y)) &#x3D; log(\frac{P(z)}{P(x)P(y)})$</li>
+</ul>
+</li>
+<li>重复第5步，直到达到子词词汇量(在第2步中定义)，或者似然性增加降至某个阈值以下。</li>
+</ul>
+<h3 id="BPE"><a href="#BPE" class="headerlink" title="BPE"></a>BPE</h3><ul>
+<li>获得足够大的语料库。</li>
+<li>定义所需的子词词汇量。</li>
+<li>将单词拆分为字符序列，并附加一个特殊的标记，<strong>分别显示单词的开头或单词的结尾</strong>。</li>
+<li>用文本中的所有字符初始化词汇表。</li>
+<li>计算文本中的序列对及其频率。 例如，(‘t’，’h’)具有频率X，(‘h’，’e’)具有频率Y。</li>
+<li>根据最频繁出现的序列对生成一个新的子词。 例如，如果(‘t’，’h’)在该对对中具有最高的频率，则新的子字单元将变为’th’。</li>
+<li>从第3步开始重复，直到达到子词词汇量(在第2步中定义)或下一个最高频率对为1。在示例中，语料库中的“t”，“h”将替换为“th”，再次计算，最频繁的对再次获得，并再次合并。</li>
+</ul>
+<p>BPE是一种贪婪的确定性算法，不能提供多个细分。 也就是说，对于给定的文本标记化文本始终是相同的。</p>
+<h3 id="Uni-gram-Language-Model（ULM）"><a href="#Uni-gram-Language-Model（ULM）" class="headerlink" title="Uni-gram Language Model（ULM）"></a><strong>Uni-gram Language Model（ULM）</strong></h3><p>和WordPiece一样，也是利用语言模型进行subword vocab的选择。</p>
+<p>不同之处在于，BPE和WordPiece算法的词表大小都是从小到大变化，属于增量法。而Unigram Language Model则是减量法,即先初始化一个大词表，根据评估准则不断丢弃词表，直到满足限定条件。ULM算法考虑了句子的不同分词可能，因而能够输出带概率的多个子词分段。</p>
+<p>-<br>    初始时，建立一个足够大的词表。一般，可用语料中的所有字符加上常见的子字符串初始化词表，也可以通过BPE算法初始化。</p>
+<ul>
+<li>针对当前词表，用EM算法求解每个子词在语料上的概率。</li>
+<li>对于每个子词，计算当该子词被从词表中移除时，总的loss降低了多少，记为该子词的loss。</li>
+<li>将子词按照loss大小进行排序，丢弃一定比例loss最小的子词(比如20%)，保留下来的子词生成新的词表。这里需要注意的是，单字符不能被丢弃，这是为了避免OOV情况。</li>
+<li>重复步骤2到4，直到词表大小减少到设定范围。</li>
+</ul>
+<h2 id="3-Transformer-GPT-BERT"><a href="#3-Transformer-GPT-BERT" class="headerlink" title="3.Transformer &amp; GPT &amp; BERT"></a>3.Transformer &amp; GPT &amp; BERT</h2><h3 id="Transformer为什么使用多头注意力"><a href="#Transformer为什么使用多头注意力" class="headerlink" title="Transformer为什么使用多头注意力"></a>Transformer为什么使用多头注意力</h3><p>在超高维空间中做点积来获得向量之间的接近性，意义非常小，因为向量非常分散。分成多个head以后，每个head的embedding维数降低。比如，GPT-3是96头， 这样每个头只有128维。这样利用向量点积计算向量之间的接近性就有效多了。</p>
+<p><strong>将隐状态向量分成多个头，形成多个子语义空间，可以让模型去关注不同维度语义空间的信息</strong>。（论文原话）</p>
+<p>每个注意力头，只关注最终输出序列中一个子空间，互相<strong>独立</strong>。其核心思想在于，抽取到更加丰富的<strong>特征信息</strong>。</p>
+<h3 id="Attention为什么Q和K使用不同的矩阵生成，而不是使用K和K的点积？"><a href="#Attention为什么Q和K使用不同的矩阵生成，而不是使用K和K的点积？" class="headerlink" title="Attention为什么Q和K使用不同的矩阵生成，而不是使用K和K的点积？"></a>Attention为什么Q和K使用不同的矩阵生成，而不是使用K和K的点积？</h3><p>在attention中，主要分为两部分，一部分是相似度矩阵的计算，也就是softmax(kq^T^)，另一部分是利用相似度矩阵将原v值映射到一个新的空间。</p>
+<p>那接下来我们需要考虑一点:在已知输入x的情况下，如何建立相似度矩阵？最简单的方式就是自身点乘也就是xx^T^，其可以表征在本空间内的相似度。但通常原空间的相似度是不够的，为了使得模型有更强的表征能力，我们需要其在其他空间映射的相似度，这一点可以参考核函数的设计思想。这时一个最标准的做法就是xWx^T^(参考马氏距离)。如果对其进行拆解就是xW1(xW2)^T^，可以看到此时kq已经有所不同了。W1，W2如果保持相同，那么这个距离是对称自反的，也就是d(x1，x2)&#x3D;d(x2，x1)。但是在attention中，这种对称自反其实是不必要的，想象一下“我是一个男孩”这句话，男孩对修饰我的重要性应该要高于我修饰男孩的重要性。</p>
+<h3 id="Attention中Q和K为什么是点积而不是加法？"><a href="#Attention中Q和K为什么是点积而不是加法？" class="headerlink" title="Attention中Q和K为什么是点积而不是加法？"></a>Attention中Q和K为什么是点积而不是加法？</h3><h3 id="3-1-Pre-Norm和Post-Norm的区别"><a href="#3-1-Pre-Norm和Post-Norm的区别" class="headerlink" title="3.1 Pre Norm和Post Norm的区别"></a>3.1 Pre Norm和Post Norm的区别</h3><p>PreNorm: </p>
+<p>$x_{t+1} &#x3D; x_t+F(norm(x_t)) &#x3D; x_{t-1} + F(norm(x_t)) + F(norm(x_{t - 1}))$ </p>
+<p>$&#x3D; x_0 +F(norm(x_t)) + F(norm(x_{t-1})) + … +F(norm(x_0))$</p>
+<p>PostNorm: </p>
+<p>$x_{t+1} &#x3D; norm(x_t + F(x_t))$</p>
 <p>post-norm在残差之后做归一化，对参数正则化的效果更强，进而模型的鲁棒性也会更好</p>
 <p>pre-norm相对于post-norm，因为有一部分参数直接加在了后面，不需要对这部分参数进行正则化，正好可以防止模型的梯度爆炸或者梯度消失，训练更稳定</p>
 <p>Post-norm: 训练不稳定，但若成功收敛，性能比pre-norm好</p>
 <p>Pre-norm：训练更稳定，但理论层数不如Post-norm</p>
 <p>层数少选post-norm，层数多选pre-norm</p>
-<h3 id="3-2-self-attention为什么要除根号下d-k"><a href="#3-2-self-attention为什么要除根号下d-k" class="headerlink" title="3.2 self-attention为什么要除根号下d_k"></a>3.2 self-attention为什么要除根号下d_k</h3><p>attention(Q, K, V) &#x3D; softmax(QK^T^&#x2F;$\sqrt(d)$)V</p>
+<h3 id="3-2-self-attention为什么要除根号下d-k"><a href="#3-2-self-attention为什么要除根号下d-k" class="headerlink" title="3.2 self-attention为什么要除根号下d_k"></a>3.2 self-attention为什么要除根号下d_k</h3><p>$attention(Q,K,V)&#x3D;softmax(\frac{QK^T}{\sqrt{d}}V)$</p>
 <ul>
 <li>防止QK^T^的值过大，若QK的值过大，那么经过softmax后</li>
 <li>使得QK^T^的结果满足期望为0，方差为1的分布，类似于归一化</li>
@@ -326,7 +375,8 @@
 <p>(Q * K^T^) * V &#x3D; [n, n] * [n, d] &#x3D; [n, d] (复杂度为 O(n^2^ * d))</p>
 <h2 id="4-激活函数"><a href="#4-激活函数" class="headerlink" title="4.激活函数"></a>4.激活函数</h2><h3 id="为什么使用激活函数"><a href="#为什么使用激活函数" class="headerlink" title="为什么使用激活函数"></a>为什么使用激活函数</h3><p>因为神经网络中每一层都是线性求和的过程，如果没有激活函数，那么神经网络只能拟合线性映射，无法解决更复杂的问题。加入了激活函数，就给神经网络引入了非线性元素，从而使得神经网络能够拟合任何非线性映射，从而解决更复杂的问题。</p>
 <h3 id="Sigmoid激活函数"><a href="#Sigmoid激活函数" class="headerlink" title="Sigmoid激活函数"></a>Sigmoid激活函数</h3><p>f(x) &#x3D; sigmoid(x) &#x3D; 1&#x2F;(1 + e^-x^)</p>
-<p><img src="/NLP%E5%85%AB%E8%82%A1%E6%96%87.assets/image-20240523224131471.png" srcset="/img/loading.gif" lazyload alt="3"></p>
+<img src="NLP八股文.assets/image-20240523224131471.png" srcset="/img/loading.gif" lazyload alt="3" style="zoom:50%;" />
+
 <ul>
 <li>输出值在(0, 1)之间，相当于对每个输出进行了归一化</li>
 <li>可以用于预测概率作为输出的模型</li>
@@ -338,7 +388,8 @@
 <li>计算成本高</li>
 <li>输出不以0为中心，输出恒大于0。非零中心化的输出会使得其后一层的神经元的输入发生偏置偏移（Bias Shift），并进一步使得梯度下降的收敛速度变慢。</li>
 </ul>
-<h3 id="Tanh-激活函数"><a href="#Tanh-激活函数" class="headerlink" title="Tanh 激活函数"></a>Tanh 激活函数</h3><p><img src="/NLP%E5%85%AB%E8%82%A1%E6%96%87.assets/x.png" srcset="/img/loading.gif" lazyload alt="x"></p>
+<h3 id="Tanh-激活函数"><a href="#Tanh-激活函数" class="headerlink" title="Tanh 激活函数"></a>Tanh 激活函数</h3><img src="NLP八股文.assets/x.png" srcset="/img/loading.gif" lazyload alt="x" style="zoom:50%;" />
+
 <p>f(x) &#x3D; tanh(x) &#x3D; (e^x^ - e^-x^) &#x2F; (e^x^ + e^-x^) &#x3D; 2 &#x2F; (1 + e^-2x^) - 1 &#x3D; 2 * sigmoid(2x) - 1</p>
 <ul>
 <li>输出值在(-1,1)之间，输出以0为中心</li>
@@ -355,7 +406,8 @@
 <li>在零点不可导</li>
 <li>负输入的梯度为0，因此会产生永不激活的死亡神经元。</li>
 </ul>
-<h3 id="Relu-激活函数"><a href="#Relu-激活函数" class="headerlink" title="Relu 激活函数"></a>Relu 激活函数</h3><p><img src="/NLP%E5%85%AB%E8%82%A1%E6%96%87.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5qCL5qyh5aSn5qyh,size_20,color_FFFFFF,t_70,g_se,x_16-20240523224224762.png" srcset="/img/loading.gif" lazyload alt="5"></p>
+<h3 id="Relu-激活函数"><a href="#Relu-激活函数" class="headerlink" title="Relu 激活函数"></a>Relu 激活函数</h3><img src="NLP八股文.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5qCL5qyh5aSn5qyh,size_20,color_FFFFFF,t_70,g_se,x_16-20240523224224762.png" srcset="/img/loading.gif" lazyload alt="5" style="zoom:50%;" />
+
 <p>f(x) &#x3D; relu(x) &#x3D; max(0, x)</p>
 <ul>
 <li>Rleu是较为流行的激活函数</li>
@@ -409,14 +461,75 @@
 <p>M &#x3D; (P + Q) &#x2F; 2</p>
 <p>JS(P||Q) &#x3D; 1&#x2F;2 KL(P||M) + 1&#x2F;2 KL(Q||M)</p>
 <p>当两个分布完全不重合时，JS散度是一个常数（log2），梯度为0</p>
-<h2 id="6-优化器"><a href="#6-优化器" class="headerlink" title="6.优化器"></a>6.优化器</h2><h2 id="7-正则化"><a href="#7-正则化" class="headerlink" title="7.正则化"></a>7.正则化</h2><h3 id="7-1-BatchNorm和LayerNorm的区别"><a href="#7-1-BatchNorm和LayerNorm的区别" class="headerlink" title="7.1 BatchNorm和LayerNorm的区别"></a>7.1 BatchNorm和LayerNorm的区别</h3><p>Norm的目的是为了将数据拉回标准正态分布，让训练更稳定。</p>
+<h2 id="6-优化器"><a href="#6-优化器" class="headerlink" title="6.优化器"></a>6.优化器</h2><h3 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h3><h3 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h3><h3 id="AdamW"><a href="#AdamW" class="headerlink" title="AdamW"></a>AdamW</h3><h2 id="7-正则化"><a href="#7-正则化" class="headerlink" title="7.正则化"></a>7.正则化</h2><h3 id="7-1-BatchNorm和LayerNorm的区别"><a href="#7-1-BatchNorm和LayerNorm的区别" class="headerlink" title="7.1 BatchNorm和LayerNorm的区别"></a>7.1 BatchNorm和LayerNorm的区别</h3><p>Norm的目的是为了将数据拉回标准正态分布，让训练更稳定。</p>
 <p>BatchNorm是拿一个Batch的每一维特征进行归一化，LayerNorm是拿每个样本的所有特征进行归一化。</p>
 <p>BN抹杀了不同特征之间的大小关系（将Batch内每一维特征进行归一化），保留了不同样本间的大小关系</p>
 <p>LN抹杀了不同样本之间的大小关系（将每个样本的所有特征进行归一化），保留了不同特征间的大小关系。</p>
 <p>因为每个序列的长度通常不一样（虽然有padding，但无意义），所以无法做batchnorm。</p>
 <h3 id="L2范数"><a href="#L2范数" class="headerlink" title="L2范数"></a>L2范数</h3><p>L2 &#x3D; $\sqrt{\frac{1}{n} \sum_{i&#x3D;1}^n f(x_i)^2}$</p>
 <h3 id="L1范数"><a href="#L1范数" class="headerlink" title="L1范数"></a>L1范数</h3><p>L1 &#x3D; $\sum_{i&#x3D;1}^{n} |f(x)_i|$</p>
-<h2 id="8-LLM"><a href="#8-LLM" class="headerlink" title="8. LLM"></a>8. LLM</h2><h3 id="Continue-Pretraining和SFT"><a href="#Continue-Pretraining和SFT" class="headerlink" title="Continue Pretraining和SFT"></a>Continue Pretraining和SFT</h3><p>Continue Pretraining是在领域数据上进行预训练，使用的是没有标签的数据，数据格式和预训练的一样。Continue Pretraining的目的是让LLM更好地处理和理解领域数据</p>
+<h2 id="位置编码"><a href="#位置编码" class="headerlink" title="位置编码"></a>位置编码</h2><h3 id="Alibi"><a href="#Alibi" class="headerlink" title="Alibi"></a>Alibi</h3><h3 id="ROPE"><a href="#ROPE" class="headerlink" title="ROPE"></a>ROPE</h3><h2 id="PEFT：参数高效微调"><a href="#PEFT：参数高效微调" class="headerlink" title="PEFT：参数高效微调"></a>PEFT：参数高效微调</h2><h3 id="Adapter-tuning"><a href="#Adapter-tuning" class="headerlink" title="Adapter tuning"></a>Adapter tuning</h3><ul>
+<li>基于特征的微调是得到模型的输出后进入特定任务的网络层。</li>
+<li>全量微调是为每个任务调整所有参数。</li>
+<li>adapter微调是在网络的一些层中加入adapter，然后为每个任务仅微调adapter的参数。</li>
+</ul>
+<p>adapter微调是将adapter注入到原始网络，原始网络的权重不变，而adapter的参数随机初始化。面对一个新任务时，固定原始网络的参数，只需要为每个任务微调adapter的参数。</p>
+<p>如果初始化时，adapter导致输入和输出相差太多时，可能导致模型无法训练。所以应该把adapter初始化解决恒等函数。(因为adapter使用的残差连接，所以初始化将adapter的参数设置为接近0)</p>
+<p>只需要微调adapter的参数（3.6%），就能达到和全量微调相似的效果。</p>
+<img src="NLP八股文.assets/截屏2024-05-25 11.49.42.png" srcset="/img/loading.gif" lazyload alt="截屏2024-05-25 11.49.42" style="zoom:50%;" />
+
+<p>adapter应用于Transformer Block的attention和FFN层后面（后来有人改进只在FFN层和LayerNorm后面加Adapter模块）</p>
+<p>adapter的结构是：现将输入（维度d）映射到低维（m)，然后进行非线性变化，再映射到原始维度（d），所以一个adapter的参数是 (md + d) + (md + m) &#x3D; 2md + m + d。adapter输入和输出也使用残差连接。</p>
+<h3 id="Prefix-tuning"><a href="#Prefix-tuning" class="headerlink" title="Prefix-tuning"></a>Prefix-tuning</h3><p>在prompt前面添加一些virtual tokens，在微调期间，只训练前缀的参数（embedding）而固定LLM的参数，从而能够在只微调0.1%的参数就能获得比较好的性能。</p>
+<p>在Transfromer的每一层中，prefix的hidden矩阵就是virtual tokens的词向量矩阵（微调的参数为每一层的prefix tokens的hidden矩阵）</p>
+<p>训练时，若只微调prefix tokens的hidden矩阵的可能导致训练不稳定并且性能下降，所以在prefix hidden矩阵后面再加个MLP，一旦训练完成，可以将MLP去掉，只保留训练好的prefix tokens embedding作为prefix的hidden矩阵。</p>
+<p>prefix使用真实单词的词向量来初始化优于使用随机向量。使用任务相关的词向量由于任务无关的词向量。</p>
+<p>若prefix token超过一定数量后，性能会显著下降，可能是拥有更多特殊token会导致输入分布进一步远离预训练数据分布。</p>
+<p>优点：</p>
+<ul>
+<li><p>在低数据设置下，表现较好</p>
+</li>
+<li><p>可以为利用每个用户的数据为每个用户训练prefix，从而避免数据污染。</p>
+</li>
+<li><p>Prefix-tuning可以在一个batch中处理不同的任务（只需要在不同的任务数据前加特定于该任务的前缀即可）</p>
+</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>占用可用的序列长度。</li>
+</ul>
+<h3 id="P-tuning-v2"><a href="#P-tuning-v2" class="headerlink" title="P-tuning v2"></a>P-tuning v2</h3><h3 id="LORA"><a href="#LORA" class="headerlink" title="LORA"></a>LORA</h3><p>LORA：冻结预训练模型的权重，将可训练的秩分解矩阵注入到Transformer的每一层。</p>
+<p>因为在微调期间预训练好了秩分解矩阵，所以在推理时就可以将它的权重与预训练模型的权重相加，从而降低推理的延迟。</p>
+<img src="NLP八股文.assets/截屏2024-05-25 15.44.45.png" srcset="/img/loading.gif" lazyload alt="截屏2024-05-25 15.44.45" style="zoom:50%;" />
+
+
+
+<p>$h &#x3D; W_0x + \Delta{W}x &#x3D; W_0x + BAx$ ，其中A是随机高斯初始化，B初始化为0</p>
+<p>将Lora只应用在注意力层来减少训练参数，甚至可以只用在query和value权重矩阵上来减少训练参数。</p>
+<h5 id="给定训练参数预算，将Lora应用到那些层最有利于模型的性能？"><a href="#给定训练参数预算，将Lora应用到那些层最有利于模型的性能？" class="headerlink" title="给定训练参数预算，将Lora应用到那些层最有利于模型的性能？"></a>给定训练参数预算，将Lora应用到那些层最有利于模型的性能？</h5><p>训练参数有限时，只用在注意力层(Q,K,V,O)，参数更有限，只用在query和value</p>
+<p>在训练参数有限时，在更多的权重矩阵上使用Lora比提高Lora的秩r更有效。</p>
+<h5 id="将Lora的秩r设置为多少是最优的？"><a href="#将Lora的秩r设置为多少是最优的？" class="headerlink" title="将Lora的秩r设置为多少是最优的？"></a>将Lora的秩r设置为多少是最优的？</h5><p>Lora的秩非常小的情况下就很有竞争力了。r设置为{1,2,4,8}就足够了。</p>
+<h5 id="W-和-Delta-W-的联系有多大？"><a href="#W-和-Delta-W-的联系有多大？" class="headerlink" title="$W$和$\Delta{W}$的联系有多大？"></a>$W$和$\Delta{W}$的联系有多大？</h5><p>$W$和$\Delta{W}$具有强相关性。低秩适应矩阵可能会放大特定下游任务的重要特征，这些特征是在一般预训练模型中学习但未强调的。</p>
+<p>Lora和Adapter tuning的区别：</p>
+<ul>
+<li><p>Lora可以将微调后学习的权重加到原始模型权重上，从而不会带来推理延迟。</p>
+</li>
+<li><p>Lora模块中有两个FFN（没有bias）而Adapter tuning模块中的两个FFN有bias</p>
+</li>
+</ul>
+<h2 id="机器翻译"><a href="#机器翻译" class="headerlink" title="机器翻译"></a>机器翻译</h2><h3 id="解码策略"><a href="#解码策略" class="headerlink" title="解码策略"></a>解码策略</h3><p><strong>standard greedy search：</strong>挑选概率最高的词去输出</p>
+<p><strong>beam search：</strong>每次挑选概率最高的k个词，最后选择最终概率最大的一条链</p>
+<p><strong>sampling：</strong>按照概率分布进行采样，让生成的文本更多样化</p>
+<p><strong>sampling with temperature：</strong>这种方法可以对当前的概率分布进行缩放，例如让概率大的更大、让小的变的更小，或者让大概率和小概率之间差别没那么明显等。</p>
+<ul>
+<li>当𝑇变大时，模型在生成文本时更倾向于比较少见的词汇。𝑇越大，重新缩放后的分布就越接近均匀采样。</li>
+<li>当𝑇变小时，模型在生成文本时更倾向于常见的词。𝑇越大，重新缩放后的分布就越接近我们最开始提到的贪婪生成方法（即总是去选择概率最高的那个词）。</li>
+</ul>
+<p><strong>top-k sampling：</strong>只从前概率前top k的词中进行采样</p>
+<p><strong>top-p sampling：</strong>只从概率大于p的词中进行采样</p>
+<p><strong>Speculative Decoding（投机采样）：</strong>使用和目标模型结构相似的小模型进行自回归解码，解码n个然后和 输入拼接后输入大模型获取logits以及概率，若大模型在该位置生成该token的概率大于小模型，那么就可以采用小模型解码的结果。</p>
+<p><strong>美杜莎：</strong> </p>
+<h2 id="8-LLM"><a href="#8-LLM" class="headerlink" title="8. LLM"></a>8. LLM</h2><h3 id="BLOOM"><a href="#BLOOM" class="headerlink" title="BLOOM"></a>BLOOM</h3><h3 id="LLaMA"><a href="#LLaMA" class="headerlink" title="LLaMA"></a>LLaMA</h3><h3 id="ChatGLM"><a href="#ChatGLM" class="headerlink" title="ChatGLM"></a>ChatGLM</h3><h3 id="Baichuan"><a href="#Baichuan" class="headerlink" title="Baichuan"></a>Baichuan</h3><h3 id="Qwen"><a href="#Qwen" class="headerlink" title="Qwen"></a>Qwen</h3><h3 id="LLM-训练-推理"><a href="#LLM-训练-推理" class="headerlink" title="LLM 训练 &amp; 推理"></a>LLM 训练 &amp; 推理</h3><h3 id="Continue-Pretraining和SFT"><a href="#Continue-Pretraining和SFT" class="headerlink" title="Continue Pretraining和SFT"></a>Continue Pretraining和SFT</h3><p>Continue Pretraining是在领域数据上进行预训练，使用的是没有标签的数据，数据格式和预训练的一样。Continue Pretraining的目的是让LLM更好地处理和理解领域数据</p>
 <p>SFT是使用特定任务的数据集，有标签。SFT的目的是优化LLM在特定任务上的表现。</p>
 <h3 id="如何解决继续预训练和微调阶段的灾难性遗忘问题"><a href="#如何解决继续预训练和微调阶段的灾难性遗忘问题" class="headerlink" title="如何解决继续预训练和微调阶段的灾难性遗忘问题"></a>如何解决继续预训练和微调阶段的灾难性遗忘问题</h3><p>目前不少开源模型在通用领域具有不错的效果，但由于缺乏领域数据，往往在一些垂直领域中表现不理想，这时就需要<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%A2%9E%E9%87%8F%E9%A2%84%E8%AE%AD%E7%BB%83&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3373620546%7D">增量预训练</a>和微调等方法来提高模型的领域能力。</p>
 <p>但在领域数据增量预训练或微调时，很容易出现灾难性遗忘现象，也就是学会了垂直领域知识，但忘记了通用领域知识。</p>
